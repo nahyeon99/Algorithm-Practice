@@ -64,6 +64,34 @@ public class boj_10816_숫자카드_2 {
         return cnt;
     }
 
+    static int lower_bound(int[] A, int L, int R, int X) {
+        int ans = R + 1;
+        while (L <= R) {
+            int mid = (L + R) / 2;
+            if (A[mid] >= X) {
+                ans = mid;
+                R = mid - 1;
+            } else {
+                L = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    static int upper_bound(int[] A, int L, int R, int X) {
+        int ans = R + 1;
+        while (L <= R) {
+            int mid = (L + R) / 2;
+            if (A[mid] > X) {
+                ans = mid;
+                R = mid - 1;
+            } else {
+                L = mid + 1;
+            }
+        }
+        return ans;
+    }
+
     static void pro() {
         // N 배열 정렬하기
         Arrays.sort(NArr, 1, N + 1);
@@ -71,8 +99,9 @@ public class boj_10816_숫자카드_2 {
         int M = scan.nextInt();
         for (int i = 1; i <= M; i++) {
             int M_elem = scan.nextInt();
-            int cnt = search(M_elem);
-            sb.append(cnt).append(' ');
+            int upper = upper_bound(NArr, 1, N, M_elem);
+            int lower = lower_bound(NArr, 1, N, M_elem);
+            sb.append(upper - lower).append(' ');
         }
         System.out.println(sb);
     }
