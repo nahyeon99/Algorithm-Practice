@@ -22,48 +22,6 @@ public class boj_10816_숫자카드_2 {
         }
     }
 
-    static int checkAdjacentElement (int x, int index) {
-        // x 와 a[인덱스]가 같은지 비교합니다.
-        int cnt = 0;
-        // upper_bound check: index 를 기점으로 위쪽 인덱스들을 체크합니다.
-        for (int i = index + 1; i < NArr.length; i++) {
-            if (NArr[i] == x)
-                cnt++;
-            else
-                break;
-        }
-
-        // lower_bound check: index 를 기점으로 아래쪽 인덱스들을 체크합니다.
-        for (int i = index - 1; i >= 1; i--) {
-            if (NArr[i] == x)
-                cnt++;
-            else
-                break;
-        }
-        return cnt;
-    }
-
-    static int search(int x) {
-
-        // NArr[L...R] 에서 X 가 존재하는지 이분탐색한다.
-        // 존재한다면 정렬된 NArr 의 인접원소들 중에도 X 가 있는지 확인 후, 존재하면 cnt 를 갱신하여 반환한다.
-
-        int L = 1, R = NArr.length - 1, cnt = 0;
-        while (L <= R) {
-            int mid = (L + R) / 2;
-            if (NArr[mid] == x) {
-                int adjacentElemCnt = checkAdjacentElement(x, mid);
-                cnt = cnt + 1 + adjacentElemCnt;
-                return cnt;
-            } else if (NArr[mid] < x) {
-                L = mid + 1;
-            } else {
-                R = mid - 1;
-            }
-        }
-        return cnt;
-    }
-
     static int lower_bound(int[] A, int L, int R, int X) {
         int ans = R + 1;
         while (L <= R) {
