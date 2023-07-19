@@ -10,40 +10,37 @@ public class boj_13144_ListOfUniqueNumbers {
     static FastReader scan = new FastReader();
     static StringBuilder sb = new StringBuilder();
 
-    static int N, A[];
+    static int N, A[], count[];
 
     static void input() {
         N = scan.nextInt();
         A = new int[N + 1];
+        count = new int[100000 + 1]; // N <= 100,000
         for (int i = 1; i <= N; i++) {
             A[i] = scan.nextInt();
         }
     }
 
     /**
-     * 시간 초과 풀이 O(N^3)
-     * 1. 왼쪽 시작 L 결정 -> O(N)
-     * 2. 오른쪽 끝 R 을 L 부터 시작해서 이동 -> O(N)
-     * 3. R 을 이동해서 추가된 원소가 [L, R-1] 안에 있는지 확인 -> O(N)
+     * 시간 초과 해결 O(N)
+     * 1. 왼쪽 시작 L 의 이동 횟수 N 번
+     * 2. 오른쪽 끝을 R을 이전의 R 부터 시작해서 이동
+     * 3. L, R 이 각자 최대 N 번 이동하므로, O(N)
      */
     static void pro() {
         long ans = 0;
 
-        for (int L = 1; L <= N; L++) {
-
-            for (int R = L; R <= N; R++) {
-                int checkValue = A[R];
-                boolean pass = true;
-
-                for (int i = L; i <= R - 1; i++) {
-                    if (A[i] == checkValue) {
-                        pass = false;
-                        break;
-                    }
-                }
-                if (pass)
-                    ans++;
+        for (int L = 1, R = 0; L <= N; L++) {
+            // R 을 옮길 수 있는 만큼 옮긴다.
+            while (R + 1 <= N && count[A[R + 1]] == 0) {
+                R++;
+                count[A[R]]++;
             }
+            // R 이 넘겨진 카운트만큼 정답을 갱신한다.
+            ans += (R - L + 1);
+
+            // L 을 넘기면서 A[L] 의 개수를 감소시킨다.
+            count[A[L]]--;
         }
         System.out.println(ans);
     }
