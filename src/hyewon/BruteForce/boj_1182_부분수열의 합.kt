@@ -1,11 +1,9 @@
 package hyewon.BruteForce
 
-val br = System.`in`.bufferedReader()
 
+private fun dfs(idx: Int, sum: Int, n: Int, s: Int){
+    var answer=0
 
-var answer=0
-
-fun dfs(idx: Int, sum: Int, n: Int, s: Int){
     lateinit var arr: List<Int>
 
     if(idx==n) return
@@ -16,14 +14,19 @@ fun dfs(idx: Int, sum: Int, n: Int, s: Int){
 }
 
 fun main() = with(System.out.bufferedWriter()){
+    var answer=0
+
     lateinit var arr: List<Int>
-    //input
+    val br = System.`in`.bufferedReader()
+
+
+
     val (n,s) = br.readLine().split(' ').map{it.toInt()}
     arr = br.readLine().split(' ').map { it.toInt() }
 
-    //solve
+
     dfs(0,0,n,s)
-    //output
+
     write("$answer")
     close()
 }
