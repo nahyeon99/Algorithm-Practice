@@ -1,66 +1,46 @@
 package hyewon.BinarySearch
 
-import java.*
+import java.io.*
 
-val br = BufferedReader(InputStreamReader(System.`in`))
-val bw = BufferedWriter(OutputStreamWriter(System.out))
+private lateinit var A: IntArray
+private lateinit var B: IntArray
 
-lateinit var NM : List<String>
-lateinit var A : List<String>
-lateinit var B : List<String>
+fun main()  {
+    val br = BufferedReader(InputStreamReader(System.`in`))
+    val bw = BufferedWriter(OutputStreamWriter(System.`out`))
 
-fun main(){
+
     repeat(br.readLine().toInt()) {
+        val (n, m) = br.readLine().split(" ").map { it.toInt() }
+        A = br.readLine().split(" ").map { it.toInt() }.toIntArray()
+        B = br.readLine().split(" ").map { it.toInt() }.sorted().toIntArray()
 
-        input()
-        search()
-    }
-}
+        var ans = 0
 
-
-private fun input(){
-    NM = br.readLine().split(' ')
-
-    A = br.readLine().split(' ')
-    B = br.readLine().split(' ')
-
-}
-
-private fun search(){
-    B.sorted()
-
-
-
-
-}
-
-private fun serachFood(A : List<String>,T : Int, L : Int, R : Int) {
-    var result = L - 1
-
-    while ( L <= R) {
-        var M = (L + R) / 2
-        if(A[M] < T) {
-            result = M
-            L = M + 1
-        }else{
-            r
+        for (e in A) {
+            ans += lowerBound(e)
         }
+
+        bw.write("$ans\n")
     }
+
+    bw.flush()
+    bw.close()
 }
 
-static int lower_bound(int[] A, int L, int R, int X) {
-    // A[L...R] 에서 X 미만의 수 중 제일 오른쪽 인덱스를 반환한다.
-    // 그런 값이 없다면 L - 1을 리턴한다.
+private fun lowerBound(target: Int): Int {
 
-    int result = L - 1; // 탐색한 값의 인덱스
-    while (L <= R) {
-        int M = (L + R) / 2;
-        if (A[M] < X) {
-            result = M;
-            L = M + 1;
+    var L = 0
+    var R = B.lastIndex
+
+    while (L <= R) { //L > R 되는 순간을 찾기 ->
+        val mid = (L + R) / 2
+        if (B[mid] < target) {
+            L = mid + 1
         } else {
-            R = M - 1;
+            R = mid - 1
         }
     }
-    return result;
+
+    return L
 }
