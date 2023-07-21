@@ -22,10 +22,14 @@ public class boj_16472_고냥이 {
 
     static void add(char x) { // x 라는 알파벳 추가
         cnt[x-'a']++;
+        if (cnt[x-'a'] == 1)
+            kind++;
     }
 
     static void erase(char x) { // x 라는 알파벳 제거
         cnt[x-'a']--;
+        if (cnt[x-'a'] == 0)
+            kind--;
     }
 
     static void pro() {
@@ -35,16 +39,9 @@ public class boj_16472_고냥이 {
             add(A.charAt(R));
 
             // 불가능하면, 가능할 때까지 L을 이동
-            while (true) {
-                kind = 0;
-                for (int i = 0; i < 26; i++) {
-                    if (cnt[i] != 0)
-                        kind++;
-                }
-                if (kind <= N) break;
-
-                erase(A.charAt(L ));
-                L++;
+            // 최적화: O(26) -> O(1)
+            while (kind > N) {
+                erase(A.charAt(L++));
             }
 
             // 탈출 시 kind 의 개수가 N 에 만족한다는 뜻 이므로
