@@ -19,17 +19,18 @@ fun main() {
     print(sb.toString())
 
 
-    fun dfs(idx: Int, len: Int, str: String) {
-        if (len == hyewon.BruteForce.m) {
-            sb.append(str).append("\n")
-            return
-        }
 
-        for (i in 1..hyewon.BruteForce.n) {
-            if (len == 0)
-                dfs(i, 1, hyewon.BruteForce.arr[i].toString())
-            else
-                dfs(i, len + 1, "$str ${hyewon.BruteForce.arr[i]}")
-        }
+}
+private fun dfs(idx: Int, len: Int, str: String) {
+    if (len == hyewon.BruteForce.m) {
+        sb.append(str).append("\n")
+        return
+    }
+
+    for (i in 1..hyewon.BruteForce.n) {
+        if (len == 0)
+            dfs(i, 1, hyewon.BruteForce.arr[i].toString())
+        else
+            dfs(i, len + 1, "$str ${hyewon.BruteForce.arr[i]}")
     }
 }
