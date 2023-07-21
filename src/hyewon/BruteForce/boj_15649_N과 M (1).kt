@@ -7,6 +7,8 @@ var n = 0
 var m = 0
 
 fun main() {
+
+
     val nm = readLine()!!.split(" ")
     m = nm[1].toInt()
     n = nm[0].toInt()
@@ -17,7 +19,7 @@ fun main() {
     dfs(1, 0, "")
 }
 
-fun dfs(idx: Int, len: Int, str: String) {
+private fun dfs(idx: Int, len: Int, str: String) {
     if (len == m) {
         println(str)
         return
