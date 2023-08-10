@@ -1,11 +1,8 @@
 package hyewon.BruteForce
 
-import java.io.BufferedReader
-import java.io.BufferedWriter
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
+import java.io.*
 
-/**아예 startNum을 설정함으로써 변경
+/**
  * #분류 ) BruteForce
  * #포인트 ) N개중 중복이 불가능 하고 * 고르기
  * #정답의 최대치 ) N : 8, M : 8, ans : 최대 8자리 수인 배열임(IntArray)
