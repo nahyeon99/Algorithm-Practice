@@ -5,7 +5,7 @@ import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 
-/**현재 버전 : 47번째 고르기 조건이 세련되지 않다. 
+/**아예 startNum을 설정함으로써 변경
  * #분류 ) BruteForce
  * #포인트 ) N개중 중복이 불가능 하고 * 고르기
  * #정답의 최대치 ) N : 8, M : 8, ans : 최대 8자리 수인 배열임(IntArray)
@@ -41,10 +41,12 @@ private fun recFun(n : Int, m : Int, k : Int){
         for(i in 1 .. m) bw.write("${ans[i]} ")
         bw.write("\n")
     } else {
-        for(num in 1..n){
+        //고르기(오름차순) : 이전의 수보다 작은지 체크
+        val startNum = ans[k-1]
+
+        for(num in startNum..n){
             //중복 불가능 : 사용한 수인지 체크
-            //고르기(오름차순) : 이전의 수보다 작은지 체크
-            if(used[num]==1 || ans[k-1] > num) continue
+            if(used[num]==1) continue
 
             ans[k] = num
             used[num] = 1 //중복 불가능 : 사용한 수면 1로 바꾸기
