@@ -1,49 +1,34 @@
 package hyewon.BruteForce
 
-import java.util.*
-import kotlin.math.*
+import java.io.*
 
-fun main() = with(Scanner(System.`in`)){
-    var arr = IntArray(100){0}
-    var sign = IntArray(4){0}
-    var n = 0
-    var max = -100000000
-    var min = 100000000
+/**
+ * #분류 ) BruteForce
+ * #포인트 ) N개중 중복이 불가능 하고 * 순서 있게 나열 하기
+ * #정답의 최대치 ) N : 11, A_i : 100, ans : -1_000_000_000 ~ 1_000_000_000
+ * #시간 복잡도 ) O(N!/(N-M)!) = 3_628_800
+ * #공간 복잡도 ) O(m)
+ * #메모
+ * 1.
+ */
 
-    // 수의 개수 입력
-    n = nextInt()
+private val br = BufferedReader(InputStreamReader(System.`in`))
+private val bw = BufferedWriter(OutputStreamWriter(System.out))
+private var min = 0
+private var max = 0
 
-    // 수열 입력
-    for (i in 0 until n) arr[i] = nextInt()
+fun main(){
+    val n = br.readLine().toInt() //수의 개수
+    val nums = br.readLine().split(" ").map { it.toInt() }
+    val operators = br.readLine().split(" ").map { it.toInt() }
 
-    // 부호 수 입력
-    for (i in sign.indices) sign[i] = nextInt()
+    recFun(n, 0)
 
-    // dfs
-    fun find(a : Int, x : Int){
-        // 탐색 완료
-        if(a == n){
-            max = max(max,x)
-            min = min(min,x)
-        }
+    bw.flush()
+    bw.close()
+}
 
-        for(i in sign.indices){
-            if(sign[i] != 0){
-                sign[i]--
-                when(i){
-                    0 -> find(a+1,x+arr[a])
-                    1 -> find(a+1,x-arr[a])
-                    2 -> find(a+1,x*arr[a])
-                    3 -> find(a+1,x/arr[a])
-                }
-                sign[i]++
-            }
-        }
-    }
-
-    find(1,arr[0])
-
-    println(max)
-    println(min)
+private fun recFun(n : Int, k : Int) {
+    //종료 조건 : 만약 연산자 선택이 다 끝났으면 종료
 
 }

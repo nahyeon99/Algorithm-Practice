@@ -1,6 +1,5 @@
 package nahyeon.TwoPointers;
 
-import nahyeon.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
